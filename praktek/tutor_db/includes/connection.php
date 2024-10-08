@@ -1,6 +1,7 @@
 <?php
-session_start();
-define('BASE_URL', 'http://localhost/ajar/BWP_2024/praktek/tutor_db');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 /**
  * https://phpdelusions.net/pdo
  *

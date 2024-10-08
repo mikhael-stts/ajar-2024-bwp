@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../../includes/connection.php';
 
+if (!isset($_SESSION['yanglogin']) || $_SESSION['yanglogin']['pengguna_role'] !== 'admin') {
+    header('Location: ../../index.php');
+    exit;
+}
+
 // get genre data from database
 $statement = $pdo->prepare('SELECT * FROM genre');
 $statement->execute();

@@ -1,5 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 date_default_timezone_set('Asia/Jakarta');
+define('BASE_URL', 'http://localhost/ajar/BWP_2024/praktek/tutor_db');
 ?>
 
 <!doctype html>
@@ -22,19 +26,22 @@ date_default_timezone_set('Asia/Jakarta');
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
+
+                    <?php if (isset($_SESSION['yanglogin']) && $_SESSION['yanglogin']['pengguna_role'] == "admin") : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin/animedb/anime_view.php">Admin</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="d-flex" role="search">
+                    <?php if (isset($_SESSION['yanglogin'])) : ?>
+                        <a href="<?= BASE_URL . "/logout.php" ?>" class="btn btn-danger" type="submit">Logout</a>
+                    <?php else : ?>
+                        <a href="login.php" class="btn btn-success" type="submit">Login</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </nav>

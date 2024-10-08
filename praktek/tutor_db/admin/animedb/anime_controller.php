@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../../includes/connection.php';
 
+if (!isset($_SESSION['yanglogin']) || $_SESSION['yanglogin']['pengguna_role'] !== 'admin') {
+    header('Location: ../../index.php');
+    exit;
+}
+
 // Handle adding or updating anime
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['anime_name'], $_POST['genre_id'], $_POST['anime_year'], $_POST['anime_image'], $_POST['anime_description'])) {
