@@ -14,6 +14,7 @@ define('BASE_URL', 'http://localhost/ajar/BWP_2024/praktek/tutor_db');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -28,10 +29,14 @@ define('BASE_URL', 'http://localhost/ajar/BWP_2024/praktek/tutor_db');
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
-
-                    <?php if (isset($_SESSION['yanglogin']) && $_SESSION['yanglogin']['pengguna_role'] == "admin") : ?>
+                    <?php if (isset($_SESSION['yanglogin'])) : ?>
+                        <?php if ($_SESSION['yanglogin']['pengguna_role'] == "admin") : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin/animedb/anime_view.php">Admin</a>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin/animedb/anime_view.php">Admin</a>
+                            <a class="nav-link" href="chat/index.php">Chatting (ajax)</a>
                         </li>
                     <?php endif; ?>
                 </ul>

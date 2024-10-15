@@ -40,6 +40,19 @@ insert  into `anime`(`anime_id`,`anime_name`,`genre_id`,`anime_year`,`anime_imag
 (19,'Re:Zero',4,2016,'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg','A boy is transported to a fantasy world and experiences a time-loop.'),
 (20,'Sword Art Online',4,2012,'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg','Players of a virtual reality MMORPG find themselves trapped inside the game.');
 
+/*Table structure for table `chat` */
+
+DROP TABLE IF EXISTS `chat`;
+
+CREATE TABLE `chat` (
+  `chat_id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `chat_pengirim` bigint DEFAULT NULL,
+  `chat_penerima` bigint DEFAULT NULL,
+  `chat_isi` text,
+  `chat_isread` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`chat_id`)
+);
+
 /*Table structure for table `genre` */
 
 DROP TABLE IF EXISTS `genre`;
@@ -58,3 +71,23 @@ insert  into `genre`(`genre_id`,`genre_name`) values
 (3,'Drama'),
 (4,'Fantasy'),
 (5,'Horror');
+
+/*Table structure for table `pengguna` */
+
+DROP TABLE IF EXISTS `pengguna`;
+
+CREATE TABLE `pengguna` (
+  `pengguna_id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `pengguna_nama` varchar(255) DEFAULT NULL,
+  `pengguna_username` varchar(255) DEFAULT NULL,
+  `pengguna_password` text,
+  `pengguna_role` enum('admin','pengguna') DEFAULT NULL,
+  PRIMARY KEY (`pengguna_id`)
+);
+
+/*Data for the table `pengguna` */
+
+insert  into `pengguna`(`pengguna_id`,`pengguna_nama`,`pengguna_username`,`pengguna_password`,`pengguna_role`) values 
+(1,'Super Administrator','admin','$2y$10$6fmqsBVzCaA7s9H1OntgyOpWjD0Nh08wQhiSbhKFaDapU2SdZUphG','admin'),
+(2,'Kujo Jotaro','jojo','$2y$10$5XThN1E2i/UmnOWaqib0COZuA4J8NgJYnPNCbM674Les5UW1sJ9iy','pengguna'),
+(3,'Dio Brando','dio','$2y$10$O.XIh.E/f1Ih9/GsYsEFIeXJXgyR5XowXs0ourHOOYepZ2u18eWg2','pengguna');
